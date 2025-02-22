@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: file-sharing-app
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: MAX_CONTENT_LENGTH
+        value: 16777216  # 16MB in bytes
+      - key: PYTHON_VERSION
+        value: 3.8.0
+    autoDeploy: true
