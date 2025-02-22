@@ -22,7 +22,7 @@ login_manager.login_view = 'login'
 
 # Initialize TempFileShare
 temp_share = TempFileShare(
-    base_url='http://127.0.0.1:5000',
+    base_url='https://file-sharing-app-9pbo.onrender.com',
     upload_folder=app.config['UPLOAD_FOLDER']
 )
 
