@@ -3,3 +3,4 @@ Werkzeug==2.3.7
 Flask-Login==0.6.2
 Python-dotenv==1.0.0
 gunicorn
+qrcode
