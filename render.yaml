@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: file-sharing-app
+    env: python
+    buildCommand: |
+      mkdir -p /tmp/uploads
+      chmod 777 /tmp/uploads
+      pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 4 --timeout 120
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_DEBUG
+        value: "0"  # Disabled for production
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: MAX_CONTENT_LENGTH
+        value: 104857600  # 100MB in bytes
+      - key: PYTHON_VERSION
+        value: 3.8.0
+      - key: UPLOAD_FOLDER
+        value: "/tmp/uploads"
+      - key: BASE_URL
+        sync: false  # Will be auto-populated by Render
+    autoDeploy: true
+    disk:
+      name: uploads
+      mountPath: /tmp/uploads
+      sizeGB: 5  # Increased storage for uploads
+    healthCheckPath: /
+    scaling:
+      minInstances: 1
+      maxInstances: 3
+      targetMemoryPercent: 80
+      targetCPUPercent: 70
