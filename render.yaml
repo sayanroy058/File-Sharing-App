@@ -7,10 +7,21 @@ services:
     envVars:
       - key: FLASK_ENV
         value: production
+      - key: FLASK_DEBUG
+        value: "1"
       - key: FLASK_SECRET_KEY
         generateValue: true
       - key: MAX_CONTENT_LENGTH
         value: 16777216  # 16MB in bytes
       - key: PYTHON_VERSION
         value: 3.8.0
+      - key: UPLOAD_FOLDER
+        value: "/tmp/uploads"
+      - key: BASE_URL
+        value: "https://file-sharing-app.onrender.com"
     autoDeploy: true
+    healthCheckPath: /
+    disk:
+      name: uploads
+      mountPath: /tmp/uploads
+      sizeGB: 1
