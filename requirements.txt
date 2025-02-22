@@ -4,3 +4,4 @@ Flask-Login==0.6.2
 Python-dotenv==1.0.0
 gunicorn
 qrcode
+Pillow
